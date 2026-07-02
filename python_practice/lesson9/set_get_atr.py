@@ -11,7 +11,8 @@ class User:
             if not (100 >= value >= 0):
                 print("score must be between 0 and 100. Set 0")
                 value = 0
-        super.__setattr__(self, key, value)
+        # super.__setattr__(self, key, value) # невірний варіант, викликає клас super - не знає контексту
+        super().__setattr__(key, value) # викликає вбудований метод, працює з батьківським класом
 
 alex = User("Alex", -50)
 alex.score = -50

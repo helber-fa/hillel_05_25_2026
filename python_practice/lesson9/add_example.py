@@ -30,11 +30,13 @@ class Classes:
             setattr(self, k,v)
         return result
 
-class_one = Classes({"math": {"students": "100", "start": "22/10/2026"}})
+class_one = Classes(**{"math": {"students": "100", "start": "22/10/2026"}})
 print(class_one)
 
-class_second = Classes({"pthil": {"students": "80", "start": "22/12/2026"}})
+class_second = Classes(**{"pthil": {"students": "80", "start": "22/12/2026"}})
+print(class_second)
 
-class_one += class_second
+class_one + class_second
+print(class_one)
 
-
+print(class_one.__dict__) #повертає всі атрибути інстансу у вигляді словника
