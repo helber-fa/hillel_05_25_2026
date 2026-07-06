@@ -32,7 +32,8 @@ class Wagon:
     def __init__(self, number, is_locomotive=False):
         self.is_locomotive = is_locomotive
         self.number = number
-        self.passengers = []
+        if not self.is_locomotive:
+            self.passengers = []
         # self.is_excepting_passengers = True
 
     def __str__(self):
