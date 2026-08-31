@@ -1,11 +1,12 @@
+import time
+
 import pytest
 from playwright.sync_api import expect
 
 from core.pages.login_page import LoginPage
 
-
-@pytest.mark.ui
-def test_login_positive(login_page):
+# @pytest.mark.ui
+# def test_login_positive(login_page):
         # browser = playwright.chromium.launch(
         #     headless=False,
         #     args=["--start-maximized"])
@@ -23,8 +24,31 @@ def test_login_positive(login_page):
         #
         # page.get_by_role("button", name="Login").click()
 
+@pytest.mark.ui
+def test_login_positive(login_page):
         login_page.open()
         inventory_page = login_page.login_valid_user("standard_user", "secret_sauce")
         inventory_page.is_displayed()
+        inventory_page.img_loaded()
+
+@pytest.mark.ui
+def test_login_click_enter(login_page):
+        login_page.open()
+        inventory_page = login_page.login_via_enter("standard_user", "secret_sauce")
+        inventory_page.is_displayed()
+        inventory_page.img_loaded()
+
+def test_login_wrong_password(login_page):
+        login_page.open()
+        login_page.do_invalid_login("standard_user", "wrong_pass")
+        assert login_page.get_error_message() == "Epic sadface: Username and password do not match any user in this service"
+        (expect(login_page.get_error_element()).
+         to_have_text("Epic sadface: Username and password do not match any user in this service"))
+        (expect(login_page.get_error_element())
+         .to_contain_text("Epic sadface"))
+
+
+
+
 
 
