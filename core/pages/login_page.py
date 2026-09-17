@@ -34,8 +34,10 @@ class LoginPage(BasePage):
         return InventoryPage(self.page)
 
     def do_invalid_login(self, username, password):
-        self.__username.fill(username)
-        self.__password.fill(password)
+        if username is not None:
+            self.__username.fill(username)
+        if password is not None:
+            self.__password.fill(password)
         self.__login_button.click()
 
     def get_error_message(self):
