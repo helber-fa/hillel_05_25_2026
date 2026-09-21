@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import allure
 import pytest
 
 from core.pages.login_page import LoginPage
@@ -29,10 +30,16 @@ def pytest_runtest_makereport(item, call):
         # Отримуємо фікстуру page з тесту, якщо вона там є
         page = item.funcargs.get("page")
         if page:
-            # Створюємо директорію для скріншотів, якщо її немає
-            Path("screenshots").mkdir(exist_ok=True)
-            # Зберігаємо скріншот з іменем тесту
-            page.screenshot(path=f"screenshots/{item.name}.png")
+            allure.attach(
+                page.screenshot(),
+                name=f"{item.name}",
+                attachment_type=allure.attachment_type.PNG
+            )
+
+            # # Створюємо директорію для скріншотів, якщо її немає
+            # Path("screenshots").mkdir(exist_ok=True)
+            # # Зберігаємо скріншот з іменем тесту
+            # page.screenshot(path=f"screenshots/{item.name}.png")
 
 @pytest.fixture
 def video_context(browser):

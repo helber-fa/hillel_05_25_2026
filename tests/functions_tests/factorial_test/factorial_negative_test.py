@@ -3,6 +3,7 @@ import sys
 import logging.config
 import os
 
+import allure
 import pytest
 
 from constants import BASE_PROJECT_PATH
@@ -16,6 +17,7 @@ logger = logging.getLogger("root")
 
 class FactorialNegativeTests(unittest.TestCase):
 
+    @allure.epic("Unit")
     @pytest.mark.negative
     def test_factorial_negative_number(self):
         expected_error_message = "You have to use 0 or positive numbers. You put -5"
@@ -26,6 +28,7 @@ class FactorialNegativeTests(unittest.TestCase):
         actual_error_message = exception.args[0]
         self.assertEqual(expected_error_message, actual_error_message, msg="Wrong error appeared!!")
 
+    @allure.epic("Unit")
     @pytest.mark.negative
     def test_factorial_not_number(self):
         with self.assertRaises(TypeError):

@@ -1,10 +1,14 @@
 import random
 
+import allure
 from faker import Faker
 
 faker = Faker()
 
 
+@allure.epic("API")
+@allure.feature("Local Flask feature")
+@allure.story("Create user")
 def test_create_user(flask_controller, sql_lite_cursor):
     score = random.randint(1, 100)
     data = {"name": faker.name(), "score": score}

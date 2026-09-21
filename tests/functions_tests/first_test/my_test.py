@@ -1,6 +1,9 @@
 import unittest
 import sys
 import pathlib
+
+import allure
+
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent))
 # print(sys.path)
 # print(pathlib.Path(__file__).parent.parent.parent)
@@ -11,11 +14,13 @@ def sum_two_numbers(a, b):
 
 class MyTest(unittest.TestCase):
 
+    @allure.epic("Unit")
     def test_example(self):
         actual_result = sum_two_numbers(1,3)
         expected_result = 4
         self.assertEqual(expected_result, actual_result)
 
+    @allure.epic("Unit")
     def test_example_second(self):
         actual_result = some_function(1,3)
         expected_result = 5

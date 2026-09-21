@@ -1,7 +1,10 @@
+import allure
 import pytest
 
 
-
+@allure.epic("API")
+@allure.feature("QAAUTO feature")
+@allure.story("Get user - positive")
 @pytest.mark.qaauto_api
 def test_get_current_positive(qa_auto_controller):
     response_current = qa_auto_controller.get_current()

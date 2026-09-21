@@ -1,10 +1,18 @@
 import time
 
+import allure
 import pytest
 
-
+@allure.epic("UI")
+@allure.feature("SauceDemo")
+@allure.story("Test sorting")
+@allure.title("Check sorting - price ascending")
+@allure.description("This test checks sorting of elements based on price from low to high")
+@allure.tag( "positive", "sorting")
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.link("https://jira/4553")
 @pytest.mark.ui
-def test_login_click_enter(login_page):
+def test_sorting_price_asc(login_page):
         login_page.open()
         inventory_page = login_page.login_valid_user("standard_user", "secret_sauce")
 
