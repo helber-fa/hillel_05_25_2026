@@ -21,8 +21,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     source venv/bin/activate
-                    pip install -r requirements.txt
-                    echo ENV_FOR_DYNACONF=dev >> .env'''
+                    pip install -r requirements.txt'''
             }
         }
         stage('Run tests') {
@@ -31,6 +30,12 @@ pipeline {
                     source venv/bin/activate
                     pytest -m swapi --alluredir=allure-results'''
             }
+        }
+    }
+
+    post {
+        always {
+            allure commandline: 'Allure', includeProperties: false, jdk: '', resultPolicy: 'LEAVE_AS_IS', results: [[path: 'allure-results']]
         }
     }
 }
